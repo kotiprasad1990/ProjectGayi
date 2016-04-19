@@ -6,7 +6,7 @@ public class TypeCasting extends Object{
 		
 		Parent p = new Child();
 		
-		Child c = (Child)p;
+		Child c = (Child) p;
 		
 		
 	}
