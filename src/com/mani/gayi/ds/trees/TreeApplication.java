@@ -6,6 +6,31 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
+// About the Node used in the tree.
+class Node {
+
+	private int val;
+	private ArrayList<Integer> children;
+
+	public Node(int identifier) {
+		this.val = identifier;
+		children = new ArrayList<Integer>();
+	}
+
+	public int getIdentifier() {
+		return val;
+	}
+
+	public ArrayList<Integer> getChildren() {
+		return children;
+	}
+
+	public void addChild(int val) {
+		children.add(val);
+	}
+}
+
+// this is a tree which contains the root node and n number of child nodes.
 class Tree {
 	private final static int ROOT = 0;
 	private HashMap<Integer, Node> nodes;
@@ -62,28 +87,6 @@ class Tree {
 
 }
 
-class Node {
-
-	private int val;
-	private ArrayList<Integer> children;
-
-	public Node(int identifier) {
-		this.val = identifier;
-		children = new ArrayList<Integer>();
-	}
-
-	public int getIdentifier() {
-		return val;
-	}
-
-	public ArrayList<Integer> getChildren() {
-		return children;
-	}
-
-	public void addChild(int val) {
-		children.add(val);
-	}
-}
 
 class TreeIterator implements Iterator<Node> {
 	private LinkedList<Node> list;
