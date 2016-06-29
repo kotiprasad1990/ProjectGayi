@@ -1,5 +1,8 @@
 package com.mani.gayi.string;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // One of the common programming tasks is to replace 
 //characters or substring from a String object in Java. 
 
@@ -44,9 +47,13 @@ public class StringReplacement {
 	public StringReplacement(String s) {
 		this.word = s;
 	}
-
-	// Method 1
-	public void replace(char charactertoreplace, char replacingcharacter) {
+	
+	public String getWord() {
+		return word;
+	}
+	
+	// Character replacing Navie Way...
+	public String replace(char charactertoreplace, char replacingcharacter) {
 
 		int length = word.length();
 
@@ -57,20 +64,70 @@ public class StringReplacement {
 			}
 		}
 
-		word = String.valueOf(stringcharacters);
+		return String.valueOf(stringcharacters);
 	}
 
-	public String getWord() {
-		return word;
+	// String replacing Navie way...
+	public String replace(String stringtoreplace,String replacingstring)
+	{
+		
+		char[] workingstringchararr = word.toCharArray();
+		char[] stringtoreplacearr = stringtoreplace.toCharArray();
+		int length = word.length();
+		int stringiterationslimit = stringtoreplace.length();
+		
+		
+		// String is present or not
+		int stringcounter = 0;
+		
+		// List of starting indexes of the strings found...
+		List<Integer> listofindexesfound = new ArrayList<>();
+		
+		// number of outer loop iterations...
+		int numberofouterloopiterations = length-stringiterationslimit;
+		
+		// iterate the number of times to compare the pattern with the string s...
+		for(int numberofiterations = 0 ;  numberofiterations < numberofouterloopiterations;)
+		{
+			for(int searchstringiteration =0;searchstringiteration<stringiterationslimit;searchstringiteration++)
+			{
+				if(workingstringchararr[numberofiterations+searchstringiteration]!=stringtoreplacearr[searchstringiteration])
+				{
+					System.out.println(workingstringchararr[searchstringiteration]+"-----"+stringtoreplacearr[searchstringiteration]);
+					break;
+				}
+				else
+				{
+					stringcounter =stringcounter+1;
+				}
+				
+			}
+			System.out.println("------Looop Completed ------------- "+numberofiterations);
+			if(stringiterationslimit==stringcounter)
+			{
+				listofindexesfound.add(numberofiterations);
+				numberofiterations = numberofiterations+stringiterationslimit-1;
+				System.out.println("Found a String");
+			}
+			else
+			{
+				System.out.println("Single Increment");
+				numberofiterations++;
+			}
+			
+		}
+		
+		return null;
 	}
+	
+	
 
 	// main method to test the program...
 	public static void main(String[] args) {
 
-		StringReplacement s = new StringReplacement("Hooollo");
-		System.out.println("Before Replacement " + s.getWord());
-		s.replace('o', 'e');
-		System.out.println("After Replacement " + s.getWord());
+		StringReplacement s = new StringReplacement("I am very cool");
+		
+		String s1 = s.replace("am", "no");
 
 	}
 }
