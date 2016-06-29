@@ -2,6 +2,8 @@ package com.mani.gayi.ds.array;
 
 import com.mani.gayi.utils.UtilityClass;
 
+// Source :  Amazon
+
 public class RemoveDuplicatePrimes {
 	
 	public static void main(String[] args) {
