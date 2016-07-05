@@ -5,7 +5,15 @@ public class TreeNode {
 	public TreeNode right;
 	int data;
 
-	
+	public TreeNode()
+	{
+	}
+
+	public TreeNode(int data) {
+		this.left = null;
+		this.right = null;
+		this.data = data;
+	}
 	
 	public TreeNode getLeft() {
 		return left;
@@ -43,9 +51,4 @@ public class TreeNode {
 
 
 
-	public TreeNode(int data) {
-		this.left = null;
-		this.right = null;
-		this.data = data;
-	}
 }
