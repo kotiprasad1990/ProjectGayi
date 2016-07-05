@@ -1,17 +1,5 @@
 package com.mani.gayi.ds.trees;
 
-class TreeNode {
-	public TreeNode left;
-	public TreeNode right;
-	int data;
-
-	public TreeNode(int data) {
-		this.left = null;
-		this.right = null;
-		this.data = data;
-	}
-}
-
 public class BinarySearchTree {
 	public TreeNode root;
 
