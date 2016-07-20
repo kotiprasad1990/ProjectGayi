@@ -123,5 +123,12 @@ public class TreeTester {
 		
 		node1000.setLeft(null);
 		node1000.setRight(node1200);
+	    //BinarySearchTree bst=new BinarySearchTree();
+		//bst.preOrderTraversalUsingRecursion(root);
+		//bst.preOrderTraversalUsingIteration(root);
+		//bst.inOrderUsingRecursion(root);
+		//bst.inOrderUsingIteration(root);
+		//bst.postOrderUsingRecursion(root);
+		
 	}
 }
