@@ -1,11 +1,19 @@
 package com.mani.gayi.ds.trees;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 // this class computes the vertical distance of tree
 public class VerticalDistance {
 
 	Values val = new Values();
 
-	// Using recursion...
+	// ----------------------------------- 1)  Start Recursion Basic One---------------------------------------
+	// time complexity is O(n^2).
+	
+	
 	// finding the max and min horizontal distances;
 	public int findMinMax(TreeNode root, Values val, int hd) {
 		if (root == null)
@@ -57,6 +65,35 @@ public class VerticalDistance {
 		}
 	}
 
+	// ------------------------------------- 2) End Recursion Basic one-------------------------------------------------
+	
+	
+	// ---------------------------------- Start Recursion using HashMap Based ------------------------------
+	// time complexity is O(n)
+	
+	public void verticalOrderUsingHashMap(TreeNode root,int hd,Map<Integer,List<Integer>> map)
+	{
+		
+		if(root==null)
+			return;
+		
+		// getting the list and adding it to it.
+		List<Integer> list = new ArrayList<Integer>();
+		
+		if(map.containsKey(hd))
+		{
+		list = map.get(hd); 
+		}
+		
+		list.add(root.getData());
+		map.put(hd, list);
+		
+		verticalOrderUsingHashMap(root.getLeft(),hd-1,map);
+		verticalOrderUsingHashMap(root.getRight(),hd+1,map);
+	}
+	
+	// -------------------------------------- End Recursion using HashMap Based --------------------------
+	
 	// Constructing a tree
 	public static void main(String[] args) {
 
@@ -70,7 +107,7 @@ public class VerticalDistance {
 	//	 /  \	   / \    / \
 	//  30  79   131 167 500 850
 	// /  \						\
-	//21  45					1000
+ 	//21  45					1000
 	//   /  \						\
 	//  32  57						 1200		
 
@@ -147,7 +184,24 @@ public class VerticalDistance {
 		node1000.setLeft(null);
 		node1000.setRight(node1200);
 
-		new VerticalDistance().verticalOrder(root);
+	//	new VerticalDistance().verticalOrder(root);
+		
+		Map<Integer,List<Integer>> map = new HashMap<Integer,List<Integer>>();
+		
+		new VerticalDistance().verticalOrderUsingHashMap(root, 0, map);
+		for(Integer i : map.keySet()){
+			
+			System.out.println(" Key is "+i+" list size is "+map.get(i).size());
+			if(map.get(i).size()>0)
+			for(Integer value : map.get(i))
+			{
+				System.out.println(" "+value+" ");
+			}
+			
+		}
+		System.out.println("");
+		
+		System.out.println("Map value "+map.size());
 
 	}
 
