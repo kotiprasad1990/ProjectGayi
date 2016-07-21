@@ -5,15 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
+
 // this class computes the vertical distance of tree
 public class VerticalDistance {
 
 	Values val = new Values();
 
-	// ----------------------------------- 1)  Start Recursion Basic One---------------------------------------
+	// 1) Recursion Vertical Order Basic ******************************** 
 	// time complexity is O(n^2).
-	
-	
+
 	// finding the max and min horizontal distances;
 	public int findMinMax(TreeNode root, Values val, int hd) {
 		if (root == null)
@@ -65,51 +66,111 @@ public class VerticalDistance {
 		}
 	}
 
-	// ------------------------------------- 2) End Recursion Basic one-------------------------------------------------
-	
-	
-	// ---------------------------------- Start Recursion using HashMap Based ------------------------------
+	// 1) Recursion Vertical Order Basic ********************************
+
+	// 2) Recursion Vertical Order HashMap Based ************************
 	// time complexity is O(n)
-	
-	public void verticalOrderUsingHashMap(TreeNode root,int hd,Map<Integer,List<Integer>> map)
-	{
-		
-		if(root==null)
+
+	public void verticalOrderUsingHashMap(TreeNode root, int hd,
+			Map<Integer, List<Integer>> map) {
+
+		if (root == null)
 			return;
-		
+
 		// getting the list and adding it to it.
 		List<Integer> list = new ArrayList<Integer>();
-		
-		if(map.containsKey(hd))
-		{
-		list = map.get(hd); 
+
+		if (map.containsKey(hd)) {
+			list = map.get(hd);
 		}
-		
+
 		list.add(root.getData());
 		map.put(hd, list);
-		
-		verticalOrderUsingHashMap(root.getLeft(),hd-1,map);
-		verticalOrderUsingHashMap(root.getRight(),hd+1,map);
-	}
-	
-	// -------------------------------------- End Recursion using HashMap Based --------------------------
-	
-	// Constructing a tree
-	public static void main(String[] args) {
 
+		verticalOrderUsingHashMap(root.getLeft(), hd - 1, map);
+		verticalOrderUsingHashMap(root.getRight(), hd + 1, map);
+	}
+
+	// 2) Recursion Vertical Order HashMap Based ************************
+
+	// 3) Recursion Vertical Order Linked List   ************************
+
+	// main function to traversal...
+	public void verticalOrderUsingDoubleLinkedList(TreeNode root,
+			NodesDoubleLinkedList linkedlist) {
+		verticalOrderUsingDoubleLinkedListUtil(root, linkedlist);
+
+		// Move the linked list to the begining...
+
+		while (linkedlist.previous != null) {
+			linkedlist = linkedlist.previous;
+		}
+
+		System.out.println("Vertical tree order : ");
+		while (linkedlist.next != null) {
+			List<Integer> list = linkedlist.listofNodes;
+			for (Integer i : list) {
+				System.out.print(" " + i + " ");
+			}
+			System.out.println();
+
+			linkedlist = linkedlist.next;
+		}
+
+	}
+
+	// for this we create a double linked list
+	public void verticalOrderUsingDoubleLinkedListUtil(TreeNode node,
+			NodesDoubleLinkedList linkedlist) {
+
+		// first get the list from the linked list and add the current node data
+		// to the double linked list.
+		List<Integer> list = linkedlist.listofNodes;
+		list.add(node.getData());
+		linkedlist.listofNodes = list;
+
+		// if the current node is having a left node
+		// then we create new node and link it to the previous node of the
+		// current node.
+
+		// process left tree...
+		if (node.getLeft() != null) {
+			if (linkedlist.previous == null) {
+				linkedlist.previous = new NodesDoubleLinkedList();
+				linkedlist.previous.next = linkedlist;
+			}
+			verticalOrderUsingDoubleLinkedListUtil(node.getLeft(),
+					linkedlist.previous);
+		}
+
+		// process right tree
+		if (node.getRight() != null) {
+			if (linkedlist.next == null) {
+				linkedlist.next = new NodesDoubleLinkedList();
+				linkedlist.next.previous = linkedlist;
+			}
+			verticalOrderUsingDoubleLinkedListUtil(node.getRight(),
+					linkedlist.next);
+		}
+	}
+
+	// 3) Recursion Vertical Order Linked List   ************************
+	
+	
 		// creating a tree
 
-	//		 	  103
-	//			/    \
-	//		 85		 180
-	//		/ \		 /  \
-	//	  75   99 150    700
-	//	 /  \	   / \    / \
-	//  30  79   131 167 500 850
-	// /  \						\
- 	//21  45					1000
-	//   /  \						\
-	//  32  57						 1200		
+		//		 	  103
+		//			/    \
+		//		 85		 180
+		//		/ \		 /  \
+		//	  75   99 150    700
+		//	 /  \	   / \    / \
+		//  30  79   131 167 500 850
+		// /  \						\
+		//21  45					1000
+		//   /  \						\
+		//  32  57						 1200		
+	public static void main(String[] args) {
 
 		TreeNode root = new TreeNode();
 		root.setData(103);
@@ -184,24 +245,26 @@ public class VerticalDistance {
 		node1000.setLeft(null);
 		node1000.setRight(node1200);
 
-	//	new VerticalDistance().verticalOrder(root);
-		
-		Map<Integer,List<Integer>> map = new HashMap<Integer,List<Integer>>();
-		
-		new VerticalDistance().verticalOrderUsingHashMap(root, 0, map);
-		for(Integer i : map.keySet()){
-			
-			System.out.println(" Key is "+i+" list size is "+map.get(i).size());
-			if(map.get(i).size()>0)
-			for(Integer value : map.get(i))
-			{
-				System.out.println(" "+value+" ");
-			}
-			
-		}
-		System.out.println("");
-		
-		System.out.println("Map value "+map.size());
+		// new VerticalDistance().verticalOrder(root);
+
+		// Map<Integer,List<Integer>> map = new
+		// HashMap<Integer,List<Integer>>();
+		//
+		// new VerticalDistance().verticalOrderUsingHashMap(root, 0, map);
+		// for(Integer i : map.keySet()){
+		//
+		// System.out.println(" Key is "+i+" list size is "+map.get(i).size());
+		// if(map.get(i).size()>0)
+		// for(Integer value : map.get(i))
+		// {
+		// System.out.println(" "+value+" ");
+		// }
+		//
+		// }
+
+		NodesDoubleLinkedList list = new NodesDoubleLinkedList();
+
+		new VerticalDistance().verticalOrderUsingDoubleLinkedList(root, list);
 
 	}
 
@@ -213,4 +276,13 @@ public class VerticalDistance {
 class Values {
 	int max = 0;
 	int min = 0;
+}
+
+class NodesDoubleLinkedList {
+	List<Integer> listofNodes = new ArrayList();
+
+	NodesDoubleLinkedList previous;
+
+	NodesDoubleLinkedList next;
+
 }
