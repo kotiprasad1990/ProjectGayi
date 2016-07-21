@@ -130,5 +130,11 @@ public class TreeTester {
 		//bst.inOrderUsingIteration(root);
 		//bst.postOrderUsingRecursion(root);
 		
+		int level = new LevelOfTreeNode().getLevelOfTreeNode(root, 45, 1);
+		System.out.println("Level is "+level);
+		
+//		int levels = new CountTreeLevel().countLevelOfTree(root);
+//		System.out.println("level is "+levels);
+		
 	}
 }
