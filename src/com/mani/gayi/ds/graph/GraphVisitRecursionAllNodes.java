@@ -1,4 +1,4 @@
-package com.mani.gayi.graph;
+package com.mani.gayi.ds.graph;
 // Java program to print DFS traversal from a given given graph
 import java.io.*;
 import java.util.*;
