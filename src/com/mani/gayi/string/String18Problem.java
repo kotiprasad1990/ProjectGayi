@@ -29,10 +29,10 @@ public class String18Problem {
 	public static void main(String[] args) {
 		
 	List<String> words = new String18Problem().compress("Manidhar");
-//	for(String word : words)
-//	{
-//		System.out.println("words "+word);
-//	}
+	for(String word : words)
+	{
+		System.out.println("words "+word);
+	}
 	}
 	
 }
