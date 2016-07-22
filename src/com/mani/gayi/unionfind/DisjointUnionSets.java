@@ -1,4 +1,4 @@
-package com.mani.unionfind;
+package com.mani.gayi.unionfind;
 
 // A Java program to implement Disjoint Set Data
 // Structure.
