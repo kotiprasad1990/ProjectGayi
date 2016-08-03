@@ -1,4 +1,4 @@
-package com.mani.gayi.ds.array;
+package com.mani.gayi.array;
 
 import com.mani.gayi.utils.UtilityClass;
 
